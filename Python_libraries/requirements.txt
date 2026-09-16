@@ -1,0 +1,64 @@
+# Python Libraries teaching notebooks — pinned environment
+#
+# These are the exact versions all four notebooks were executed and verified
+# against. Every stored output in the .ipynb files came from this stack.
+#
+# Requires Python 3.11 or newer (pandas 3.x and matplotlib 3.11 both need it).
+# Validated on Python 3.12.4, Windows.
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate          # Windows
+#   source .venv/bin/activate       # macOS / Linux
+#   pip install -r requirements.txt
+#
+# To teach from this environment in Jupyter, register it as a kernel:
+#
+#   python -m ipykernel install --user --name py-libs --display-name "Python Libraries"
+#
+# then pick "Python Libraries" as the notebook kernel.
+
+
+# --- Core: taught directly in the notebooks ---------------------------------
+numpy==2.2.1
+pandas==3.0.5
+matplotlib==3.11.1
+beautifulsoup4==4.12.3
+requests==2.32.3
+
+
+# --- Optional: used in a few cells, which skip gracefully if absent ---------
+# openpyxl  — the Excel read/write section of 02_Pandas
+# lxml      — the faster HTML parser discussed in 04_BeautifulSoup
+openpyxl==3.1.5
+lxml==6.1.1
+
+
+# --- Running the notebooks --------------------------------------------------
+# Lower bounds rather than pins: these are tooling, not taught content, and
+# they were not part of the verified stack. Any recent version works.
+jupyterlab>=4.2
+ipykernel>=6.28
+
+
+# --- Version notes ----------------------------------------------------------
+# pandas 3.x is a deliberate choice, not an accident. The notebooks teach the
+# current behaviour of four things that changed in 3.0, and they say so where
+# it matters:
+#
+#   * text columns have a real `str` dtype (was the catch-all `object`)
+#   * copy-on-write is always on, so chained assignment never writes through
+#   * DataFrame.applymap was removed; DataFrame.map replaces it
+#   * fillna(method="ffill") was removed; use .ffill() / .bfill()
+#
+# You do NOT have to install this to use the notebooks. All four were also
+# executed end to end against pandas 2.2.2 / numpy 1.26.4 / matplotlib 3.9.2 --
+# roughly what Google Colab ships -- and every cell runs there too. The cells
+# whose behaviour genuinely differs detect the installed version and report
+# what it does; the rest of the difference is cosmetic dtype labels
+# (`object` for `str`, `datetime64[ns]` for `[us]`).
+#
+# Install this pinned set when you want your screen to match the outputs
+# stored in the notebooks exactly -- useful when projecting in a classroom.
+#
+# Seeded random data is stable across numpy 1.26 and 2.x — the generated
+# datasets, and every figure quoted in the prose, are identical on both.
